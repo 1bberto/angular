@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Angular Class 4</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="what is your name?" [(ngModel)]="userName">
+                    </div>
+                    <button [ngClass]="{'disabled': !canLogin()}" id="sendlogin " class="btn btn-warning btn-block " (click)="loginUser()">Enter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
