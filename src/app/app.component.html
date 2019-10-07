@@ -1,31 +1,27 @@
-<div *ngIf="userName.length <= 0; else templateName">
-    <app-login (userLogin)="onLogin($event)"></app-login>
-</div>
-<ng-template #templateName>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Angular Training</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<div class="container-fluid no-padding">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" [routerLink]="['/']">Angular Training</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" (click)="changePage('userList')" [ngClass]="{'active': activePage == 'userList'}">User List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" (click)="changePage('user')" [ngClass]="{'active': activePage == 'user'}">User</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-          <app-user-name [user]="userName"></app-user-name>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="['/user-list']" routerLinkActive="active">User List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="['/user']" routerLinkActive="active">User</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+          <app-user-name [user]="authService.getLoggedUser()"></app-user-name>
           &nbsp;<span class="logout" (click)="logout()">logout</span>
-                </span>
-            </div>
-        </nav>
-    </div>
-    <div class="container-fluid">
-        <app-user-list *ngIf="activePage == 'userList'" [userList]="userList"></app-user-list>
-        <app-user-form *ngIf="activePage == 'user'" (createUser)="onUserCreated($event)"></app-user-form>
-    </div>
-</ng-template>
+            </span>
+        </div>
+    </nav>
+</div>
+
+<div class="container-fluid">
+    <br/>
+    <router-outlet></router-outlet>
+</div>

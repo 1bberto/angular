@@ -1,3 +1,9 @@
 export class User {
-  constructor(public name: string, public age: number) {}
+  public Id: number;
+  public Name: string ;
+  public Age: number;
+
+  constructor() {
+    this.Name = '';
+  }
 }

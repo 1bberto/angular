@@ -1,3 +1,8 @@
-<a href="#" class="list-group-item d-flex justify-content-between align-items-center">{{ userItem.name }}
-    <span class="badge badge-primary badge-pill">Age - {{ userItem.age }}</span>
-  </a>
+<div class="list-group-item d-flex justify-content-between align-items-center">
+    {{ userItem.Name }}
+    <span class="badge badge-primary badge-pill">Age - {{ userItem.Age }}</span>
+    <div class="btn-group">
+        <button class="btn btn-danger" (click)="removeUser(userItem)">Delete</button>
+        <button class="btn btn-success" (click)="editUser(userItem)">Edit</button>
+    </div>
+</div>

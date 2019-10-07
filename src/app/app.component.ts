@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "./models/user";
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-root",
@@ -11,12 +13,9 @@ export class AppComponent implements OnInit {
   userList: User[] = [];
   activePage: string;
 
-  constructor() {
-    this.activePage = "userList";
-    this.userName = "";
-    this.userList.push(new User("Humberto", 10));
-    this.userList.push(new User("Nahuel", 7));
-    this.userList.push(new User("Luciano", 15));
+  constructor(
+    public authService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit() {}
@@ -26,15 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.userName = "";
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
-
-  changePage(page: string) {
-    this.activePage = page;
-  }
-
-  onUserCreated(newUser: User) {
-    this.userList.push(newUser);
-    this.activePage = 'userList';
-   }
 }

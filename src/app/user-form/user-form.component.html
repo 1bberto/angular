@@ -4,12 +4,15 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name" [(ngModel)]="user.name">
+                    <input type="text" class="form-control" name="Name" placeholder="Name" [(ngModel)]="user.Name">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" placeholder="Age" [(ngModel)]="user.age">
+                    <input type="number" class="form-control" name="Age" placeholder="Age" [(ngModel)]="user.Age">
                 </div>
-                <button [ngClass]="{'disabled': !canCreateUser()}" class="btn btn-success btn-block " (click)="canCreateUser() && addUser(user)">Create User</button>
+                <button [ngClass]="{'disabled': !canCreateUser()}" class="btn btn-success btn-block " (click)="canCreateUser() && addUser(user)">
+                  <div *ngIf="!user.Id;else edit">Create User</div>
+                  <ng-template #edit>Edit User</ng-template>
+                </button>
             </div>
         </div>
     </div>

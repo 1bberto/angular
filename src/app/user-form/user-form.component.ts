@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
+import { UserService } from '../user-service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -7,20 +9,37 @@ import { User } from '../models/user';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-  @Output() createUser = new EventEmitter<User>();
-  user: User;
+  user: User = new User();
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
-    this.user = new User('', 0);
+    if (this.activatedRoute.firstChild) {
+      this.activatedRoute.firstChild.params.subscribe(parameters => {
+        const user = this.userService.getUser(+parameters.id);
+        if (user) {
+          this.user = user;
+        } else {
+          alert('User Not found!');
+          this.router.navigate(['user-list']);
+        }
+      });
+    }
   }
 
   addUser() {
-    this.createUser.emit(this.user);
+    if (!this.user.Id) {
+      this.userService.add(this.user);
+    } else {
+      this.userService.edit(this.user);
+    }
+    this.router.navigate(['/user-list']);
   }
 
   canCreateUser() {
-    return this.user.name.length > 0 && this.user.age > 0;
+    return this.user && this.user.Name && this.user.Age > 0;
   }
 }
