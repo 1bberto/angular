@@ -9,22 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  @Output() userLogin = new EventEmitter<string>();
+  model: any = {};
 
-  userName: string;
-  constructor(
-    private authService: AuthService,
-    private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.userName = "";
   }
 
-  loginUser() {
-    this.authService.login(this.userName);
-  }
-
-  canLogin() {
-    return this.userName.length > 5;
+  loginUser(userForm: any) {
+    this.authService.login(userForm.userName);
   }
 }

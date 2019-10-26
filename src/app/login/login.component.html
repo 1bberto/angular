@@ -1,13 +1,39 @@
 <div class="container">
-    <div class="row justify-content-center align-items-center" style="height:100vh">
+    <div class="row justify-content-center align-items-center login-container">
         <div class="col-4">
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center">Angular Class</h3>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="what is your name?" [(ngModel)]="userName">
-                    </div>
-                    <button [ngClass]="{'disabled': !canLogin()}" id="sendlogin " class="btn btn-warning btn-block " (click)="loginUser()">Enter</button>
+                    <form #userForm="ngForm" (submit)="loginUser(userForm.value)">
+                        <div class="form-group">
+                            <input
+                            autocomplete="off"
+                            type="text"
+                            class="form-control"
+                            required
+                            minlength="6"
+                            placeholder="what is your name?"
+                            name="userName"
+                            [(ngModel)]="model.userName"
+                            #userName="ngModel"
+                            [ngClass]="
+                              {
+                                'is-valid': userName.valid && userName.touched,
+                                'is-invalid': !userName.valid && (userName.dirty || userName.touched)
+                              }">
+                            <div
+                                *ngIf="(userName.dirty || userName.touched) && userName.errors"
+                                class="alert alert-danger error-container">
+                               <div *ngIf="userName.errors['required']">
+                                    Name is required.
+                               </div>
+                               <div *ngIf="userName.errors['minlength']">
+                                    Name must be at least 6 characters long.
+                               </div>
+                            </div>
+                        </div>
+                        <button [disabled]="!userForm.form.valid" type="submit" class="btn btn-success btn-block" (click)="loginUser()">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
