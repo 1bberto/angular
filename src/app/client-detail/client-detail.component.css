@@ -1,0 +1,33 @@
+pre {
+    padding: 1em;
+    background: black;
+    color: green;
+    position: fixed;
+    bottom: 0;
+    height: 15em;
+    width: calc(100% - 30px);
+}
+
+fieldset {
+    border: 1px solid #cacaca;
+    padding: 1em;
+    border-radius: 0.3em;
+    margin: 1em 0;
+}
+
+legend {
+    padding: 0.1em 0.3em;
+    width: unset;
+    border: 1px solid #cacaca;
+    border-radius: 0.3em;
+    font-size: 1.2em;
+}
+
+.content {
+    margin-bottom: 18em;
+    overflow-y: auto;
+}
+
+.btn {
+    margin: 0.1em;
+}

@@ -1,0 +1,25 @@
+<table class="table table-hover" *ngIf="clientList.length">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let client of clientList" (click)="getClientDetail(client.id)">
+            <th scope="row">{{client.id}}</th>
+            <td>{{client.name}}</td>
+            <td>{{client.email}}</td>
+            <td>{{client.address.city}} - {{client.address.zipcode}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="!clientList.length">
+    <div class="text-center">
+        <h4>Wait...</h4>
+        <h4>loading clients....</h4>
+    </div>
+</div>
