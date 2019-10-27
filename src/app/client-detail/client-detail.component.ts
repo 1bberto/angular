@@ -9,11 +9,13 @@ import { ClientService } from '../client.service';
   styleUrls: ['./client-detail.component.css']
 })
 export class ClientDetailComponent implements OnInit {
+
   clientId: number;
   client: Client;
   clientFound: boolean;
   loading: boolean;
   editMode: boolean;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private clientService: ClientService) { }

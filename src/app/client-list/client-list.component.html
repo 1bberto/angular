@@ -1,4 +1,4 @@
-<table class="table table-hover" *ngIf="clientList.length">
+<table class="table table-hover" *ngIf="clientList.length; else clientLoading">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -17,9 +17,9 @@
     </tbody>
 </table>
 
-<div *ngIf="!clientList.length">
-    <div class="text-center">
-        <h4>Wait...</h4>
-        <h4>loading clients....</h4>
-    </div>
-</div>
+<ng-template #clientLoading>
+  <div class="text-center">
+    <h4>Wait...</h4>
+    <h4>loading clients....</h4>
+  </div>
+</ng-template>
